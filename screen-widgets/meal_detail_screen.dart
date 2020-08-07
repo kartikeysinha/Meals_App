@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import '../dummy_data.dart';
 
-
 class MealDetailScreen extends StatelessWidget {
   static const routeName = '/meal-detail';
+  final Function _toggleFav;
+  final Function _isFav;
+
+  MealDetailScreen(this._toggleFav, this._isFav);
 
   Widget buildSectionTitle(BuildContext context, String text) {
     return Container(
@@ -84,6 +87,12 @@ class MealDetailScreen extends StatelessWidget {
             )
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(
+          _isFav(mealId) ? Icons.star : Icons.star_border,
+        ),
+        onPressed: () => _toggleFav(mealId),
       ),
     );
   }
